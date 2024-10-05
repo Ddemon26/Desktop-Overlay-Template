@@ -1,0 +1,5 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UIToolKit/MainView.uss?fileID=7433441132597879392&amp;guid=f60f2d889f8da464ca0e2f3754d02a92&amp;type=3#MainView" />
+    <engine:Label text="Hello World! From UXML" name="label-1" />
+    <engine:Label text="Hello World! With Style" name="label-2" class="custom-label" />
+</engine:UXML>
