@@ -1,5 +1,86 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Project/UIToolKit/MainView.uss?fileID=7433441132597879392&amp;guid=f60f2d889f8da464ca0e2f3754d02a92&amp;type=3#MainView" />
-    <engine:Label text="Hello World! From UXML" name="label-1" />
-    <engine:Label text="Hello World! With Style" name="label-2" class="custom-label" />
+    <Style src="project://database/Assets/OverlayCore/UIToolKit/MainView.uss?fileID=7433441132597879392&amp;guid=f60f2d889f8da464ca0e2f3754d02a92&amp;type=3#MainView" />
+    <engine:VisualElement name="Chunk-1" class="show-menu" style="flex-grow: 1; background-color: rgb(60, 60, 60); margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; width: 25%; height: 50%; position: absolute; top: 15%; left: 1%; right: 0; bottom: 0; border-top-left-radius: 1%; border-top-right-radius: 1%; border-bottom-right-radius: 1%; border-bottom-left-radius: 1%;">
+        <engine:VisualElement name="root" style="flex-grow: 1; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 1%; border-top-right-radius: 1%; border-bottom-right-radius: 1%; border-bottom-left-radius: 1%; padding-top: 1%; padding-right: 1%; padding-bottom: 1%; padding-left: 1%; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%;">
+            <engine:VisualElement name="header-container" style="flex-grow: 0; flex-shrink: 0; align-items: center;">
+                <engine:Label text="Label" />
+            </engine:VisualElement>
+            <engine:VisualElement name="switch-container" style="flex-grow: 1;">
+                <engine:ScrollView>
+                    <engine:VisualElement name="effect-container" style="flex-grow: 1;">
+                        <engine:VisualElement name="effect-settings" style="flex-grow: 1;">
+                            <engine:RadioButtonGroup choices="Mouse Effects,Waterfall Effects" name="radio-effect-group" style="flex-direction: row-reverse;" />
+                            <engine:Toggle label="Burst On Mouse Click">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_isSingleBurst" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Toggle>
+                            <engine:Toggle label="Enable Mouse Effects" style="display: none;">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_enableParticleEffect" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Toggle>
+                            <engine:SliderInt label="Active Particle Effect" fill="true" show-input-field="true">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_activeParticleEffect" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:SliderInt>
+                            <engine:Toggle label="Enable Extra Mouse Effects">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_enableObjectEffect" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Toggle>
+                            <engine:SliderInt label="Active Particle Effect" fill="true" show-input-field="true">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_activeObjectEffect" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:SliderInt>
+                            <engine:SliderInt label="Active Waterfall Effect" fill="true" show-input-field="true">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_activeWaterfallEffect" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:SliderInt>
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="settings-container" style="flex-grow: 1;">
+                        <engine:VisualElement name="ParticleSettings" style="flex-grow: 1;">
+                            <engine:Slider label="Gravity Multiplier" value="42" high-value="100" show-input-field="true" fill="true">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_gravityModifier" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Slider>
+                            <engine:Slider label="Particle Intensity" value="42" high-value="100" show-input-field="true" fill="true" low-value="1">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_emissionRateOverTime" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Slider>
+                            <engine:Slider label="Distance Intensity" value="42" high-value="100" show-input-field="true" fill="true" style="display: none;">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_emissionRateOverDistance" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Slider>
+                            <engine:Slider label="Particle Lifetime" value="2" high-value="25" show-input-field="true" fill="true" low-value="0.001">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_startLifetime" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:Slider>
+                            <engine:SliderInt label="Max Particle Limit" fill="true" show-input-field="true" high-value="10000" low-value="1">
+                                <Bindings>
+                                    <engine:DataBinding property="value" data-source-path="m_maxParticles" data-source="project://database/Assets/OverlayCore/WizardConfig.asset?fileID=11400000&amp;guid=31e2804825f1636479fe79f80e55c8e3&amp;type=2#WizardConfig" binding-mode="TwoWay" />
+                                </Bindings>
+                            </engine:SliderInt>
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                </engine:ScrollView>
+            </engine:VisualElement>
+            <engine:VisualElement style="flex-grow: 1;" />
+            <engine:VisualElement name="last-container" style="flex-grow: 0; flex-shrink: 0; flex-direction: row;">
+                <engine:VisualElement style="flex-grow: 1;" />
+                <engine:Button text="Close" name="close-menu" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:VisualElement name="Chunk-2" style="align-self: center; position: absolute; right: 2%; bottom: 7%; margin-top: 11px; margin-right: 11px; margin-bottom: 11px; margin-left: 11px;">
+        <engine:Button text="OpenOverlay" name="open-menu" />
+    </engine:VisualElement>
 </engine:UXML>

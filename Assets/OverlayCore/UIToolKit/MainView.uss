@@ -3,3 +3,27 @@
     -unity-font-style: bold;
     color: rgb(68, 138, 255);
 }
+
+.hide-menu {
+    translate: -120% 0;
+    transition-property: translate;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.show-menu {
+    transition-property: translate;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.unity-radio-button {
+    flex-grow: 1;
+    width: 45%;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+}
+
+.unity-radio-button-group__container {
+    flex-direction: row;
+}
