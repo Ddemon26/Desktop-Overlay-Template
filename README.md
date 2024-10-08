@@ -1,6 +1,6 @@
 # Desktop Overlay Template
 
-![GitHub release (latest by date)](https://img.shields.io/github/v1.0.1/release/Ddemon26/Desktop-Overlay-Template) ![GitHub last commit](https://img.shields.io/github/last-commit/Ddemon26/Desktop-Overlay-Template) ![GitHub issues](https://img.shields.io/github/issues/Ddemon26/Desktop-Overlay-Template) ![GitHub](https://img.shields.io/github/license/Ddemon26/Desktop-Overlay-Template)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Ddemon26/Desktop-Overlay-Template) ![GitHub last commit](https://img.shields.io/github/last-commit/Ddemon26/Desktop-Overlay-Template) ![GitHub issues](https://img.shields.io/github/issues/Ddemon26/Desktop-Overlay-Template) ![GitHub](https://img.shields.io/github/license/Ddemon26/Desktop-Overlay-Template)
 
 ## Project Overview
 
