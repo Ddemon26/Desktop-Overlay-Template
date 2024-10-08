@@ -24,7 +24,7 @@ namespace TCS {
             //instead we use a fixed array from editor settings
             //then we swap the sprites in the array
             int indexCount = sheet.spriteCount;
-            int spriteCount = m_spriteConfig.m_useSprites.Length;
+            int spriteCount = m_spriteConfig.m_useSprites.Count;
             
             for (var i = 0; i < indexCount; i++) {
                 sheet.SetSprite(i, i < spriteCount ? m_spriteConfig.m_useSprites[i] : null);
