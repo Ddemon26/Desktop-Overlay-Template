@@ -1,4 +1,5 @@
 using System;
+using TCS.OverlayCore.OverlayWizard;
 using UnityEngine;
 
 namespace TCS {
@@ -7,6 +8,7 @@ namespace TCS {
         public bool m_updateDynamically;
         ParticleMainSettings m_particleMainSettings;
         ParticleEmitterSettings m_emissionSettings;
+        ParticleTextureSheetSettings m_textureSheetSettings;
         
         [SerializeField] BurstSettings m_singleBurstSettings = new(0.2f, 1, 1);
         [SerializeField] BurstSettings[] m_burstSettings;
@@ -15,13 +17,16 @@ namespace TCS {
 
         ParticleSystem m_particleSystem;
         WizardConfig m_wizardConfig;
+        SpriteConfig m_spriteConfig;
         bool m_previousIsSingleBurst;
 
-        public void Init(WizardConfig wizardConfig) {
+        public void Init(WizardConfig wizardConfig, SpriteConfig spriteConfig) {    
             m_particleSystem = GetComponent<ParticleSystem>();
             m_wizardConfig = wizardConfig;
+            m_spriteConfig = spriteConfig;
             m_particleMainSettings = new ParticleMainSettings(m_particleSystem, m_wizardConfig);
             m_emissionSettings = new ParticleEmitterSettings(m_particleSystem, m_wizardConfig);
+            m_textureSheetSettings = new ParticleTextureSheetSettings(m_particleSystem, m_spriteConfig);
             m_previousIsSingleBurst = m_wizardConfig.m_isSingleBurst;
 
             if (m_forceLoop) {
@@ -31,7 +36,7 @@ namespace TCS {
             UpdateBurstSettings();
 
             if (m_previousIsSingleBurst && !m_forceLoop) {
-                OverlayGlobalEvents.OffscreenClick += ParticlePlay;
+                TransparentWindowEvents.OffscreenClick += ParticlePlay;
             }
         }
 
@@ -39,12 +44,13 @@ namespace TCS {
             if (!m_updateDynamically) return;
             m_emissionSettings.UpdateEmissionSettings();
             m_particleMainSettings.UpdateMainSettings();
+            m_textureSheetSettings.UpdateTextureSheetSettings();
             UpdateBurstSettings();
         }
 
         void OnDestroy() {
             if (m_previousIsSingleBurst && !m_forceLoop) {
-                OverlayGlobalEvents.OffscreenClick -= ParticlePlay;
+                TransparentWindowEvents.OffscreenClick -= ParticlePlay;
             }
         }
 
@@ -55,15 +61,15 @@ namespace TCS {
                 if (m_burstSettings.Length > 0) {
                     m_burstSettings = Array.Empty<BurstSettings>();
                 }
-                OverlayGlobalEvents.OffscreenClick -= ParticlePlay;
+                TransparentWindowEvents.OffscreenClick -= ParticlePlay;
                 ParticlePlay();
             } else {
                 if (m_previousIsSingleBurst) {
                     m_burstSettings = new[] { m_singleBurstSettings };
-                    OverlayGlobalEvents.OffscreenClick += ParticlePlay;
+                    TransparentWindowEvents.OffscreenClick += ParticlePlay;
                 } else {
                     m_burstSettings = Array.Empty<BurstSettings>();
-                    OverlayGlobalEvents.OffscreenClick -= ParticlePlay;
+                    TransparentWindowEvents.OffscreenClick -= ParticlePlay;
                     ParticlePlay();
                 }
             }

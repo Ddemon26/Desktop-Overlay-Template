@@ -34,7 +34,7 @@ namespace TMPro.Examples
         }
 
 
-        // Event received when the text object has changed.
+        // LocationEvent received when the text object has changed.
         void ON_TEXT_CHANGED(Object obj)
         {
             hasTextChanged = true;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TCS._Project.Scripts;
 using UnityEngine;
 using UnityEngine.UIElements;
 namespace TCS {
@@ -43,16 +42,16 @@ namespace TCS {
 
         void OnMouseEnter() {
 #if !UNITY_EDITOR
-            TransparentWindowEvents.OnForceClickthrough?.Invoke();
+            TransparentWindowEvents.OnForceClickThrough?.Invoke();
 #endif
-            Debug.Log("OnForceNotClickthrough event invoked");
+            Debug.Log("OnForceNotClickThrough event invoked");
         }
 
         void OnMouseLeave(MouseLeaveEvent evt) {
 #if !UNITY_EDITOR
-            TransparentWindowEvents.OnForceNotClickthrough?.Invoke();
+            TransparentWindowEvents.OnForceNotClickThrough?.Invoke();
 #endif
-            Debug.Log("OnForceClickthrough event invoked");
+            Debug.Log("OnForceClickThrough event invoked");
         }
     }
 }

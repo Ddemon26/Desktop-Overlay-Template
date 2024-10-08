@@ -4,13 +4,8 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TCS._Project.Scripts {
-    public static class TransparentWindowEvents {
-        public static Action OnForceClickthrough;   
-        public static Action OnForceNotClickthrough;
-    }
-    public class TransparentWindow : MonoBehaviour
-    {
+namespace TCS {
+    public class TransparentWindow : MonoBehaviour {
         [DllImport("user32.dll")]
         public static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
 
@@ -43,9 +38,9 @@ namespace TCS._Project.Scripts {
 
         static readonly IntPtr HWND_TOPMOST = new(-1);
         const uint LWA_COLORKEY = 0x00000001;
-        
+
         bool m_clickthrough;
-        
+
         void ForceNotClickthrough() => m_clickthrough = false;
         void ForceClickthrough() => m_clickthrough = true;
 
@@ -54,9 +49,9 @@ namespace TCS._Project.Scripts {
 
         void Awake() {
             m_camera = Camera.main;
-                        
-            TransparentWindowEvents.OnForceClickthrough += ForceClickthrough;
-            TransparentWindowEvents.OnForceNotClickthrough += ForceNotClickthrough;
+
+            TransparentWindowEvents.OnForceClickThrough += ForceClickthrough;
+            TransparentWindowEvents.OnForceNotClickThrough += ForceNotClickthrough;
         }
 
         void Start() {
@@ -83,17 +78,17 @@ namespace TCS._Project.Scripts {
         void Update() {
             SetClickthrough(!IsPointerOverUIOr3DObject());
         }
-        
+
         void OnDestroy() {
-            TransparentWindowEvents.OnForceClickthrough -= ForceClickthrough;
-            TransparentWindowEvents.OnForceNotClickthrough -= ForceNotClickthrough;
+            TransparentWindowEvents.OnForceClickThrough -= ForceClickthrough;
+            TransparentWindowEvents.OnForceNotClickThrough -= ForceNotClickthrough;
         }
-    
+
         public bool IsPointerOverUIOr3DObject() {
             if (!m_clickthrough) {
                 return false;
             }
-            
+
             // Check if the pointer is over a UI element
             if (EventSystem.current.IsPointerOverGameObject()) {
                 return true;
@@ -116,7 +111,8 @@ namespace TCS._Project.Scripts {
         void SetClickthrough(bool clickthrough) {
             if (clickthrough) {
                 SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT);
-            } else {
+            }
+            else {
                 SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
             }
         }

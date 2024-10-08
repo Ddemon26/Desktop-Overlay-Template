@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TCS {
     public class RegisterClicksOffscreen : MonoBehaviour {
@@ -63,7 +62,7 @@ namespace TCS {
 
         void HandleOffscreenClick() {
             Debug.Log("Offscreen click detected!");
-            OverlayGlobalEvents.OffscreenClick?.Invoke();
+            TransparentWindowEvents.OffscreenClick?.Invoke();
         }
     }
 }
