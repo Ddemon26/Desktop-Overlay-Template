@@ -21,7 +21,6 @@ namespace TCS {
         [DllImport("user32.dll")]
         static extern int SetLayeredWindowAttributes(IntPtr hWnd, uint crKey, byte bAlpha, uint dwFlags);
 
-
         struct MARGINS {
             public int cxLeftWidth;
             public int cxRightWidth;
@@ -55,22 +54,16 @@ namespace TCS {
         }
 
         void Start() {
-            //MessageBox(new IntPtr(0), "Hello World!", "Hello Dialog", 0);
+            #if !UNITY_EDITOR
+            hWnd = GetActiveWindow();
 
-        #if !UNITY_EDITOR
-        hWnd = GetActiveWindow();
+            MARGINS margins = new MARGINS { cxLeftWidth = -1 };
+            DwmExtendFrameIntoClientArea(hWnd, ref margins);
 
-        MARGINS margins = new MARGINS { cxLeftWidth = -1 };
-        DwmExtendFrameIntoClientArea(hWnd, ref margins);
+            SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT);
 
-        //SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
-
-        SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT);
-        //SetLayeredWindowAttributes(hWnd, 0, 0, LWA_COLORKEY);
-
-
-        SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, 0);
-        #endif
+            SetWindowToCorrectScreen();
+            #endif
 
             Application.runInBackground = true;
         }
@@ -115,6 +108,30 @@ namespace TCS {
             else {
                 SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_LAYERED);
             }
+        }
+
+        void SetWindowToCorrectScreen() {
+            #if !UNITY_EDITOR
+            // Get the screen where the window should be placed
+            Vector2 mousePosition = Input.mousePosition;
+
+            // Find out which display contains the mouse cursor
+            int targetDisplay = 0;
+            for (int i = 0; i < Display.displays.Length; i++) {
+                if (mousePosition.x >= Display.displays[i].systemWidth * i &&
+                    mousePosition.x < Display.displays[i].systemWidth * (i + 1)) {
+                    targetDisplay = i;
+                    break;
+                }
+            }
+
+            // Calculate position to place the window on the correct screen
+            int posX = targetDisplay * Display.displays[targetDisplay].systemWidth;
+            int posY = 0;
+
+            // Set the window position
+            SetWindowPos(hWnd, HWND_TOPMOST, posX, posY, 0, 0, 0);
+            #endif
         }
     }
 }

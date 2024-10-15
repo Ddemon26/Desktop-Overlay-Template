@@ -27,3 +27,6 @@
 .unity-radio-button-group__container {
     flex-direction: row;
 }
+
+#Chunk-1 > #root > #switch-container > .unity-scroll-view--vertical > #unity-content-and-vertical-scroll-container {
+}
